@@ -2,6 +2,8 @@
 
 Overlay with spinner and text
 
+Spinner and text options should be added.
+
 ## Install
 
 `npm install --save aytacworld-angular-overlay`
