@@ -1,0 +1,10 @@
+<h1>
+  {{title}}
+</h1>
+
+<button (click)="outer = !outer">Outer</button>
+<button (click)="inner = !inner">Inner</button>
+
+<div class="outer" [overlay]="outer">
+  <div class="inner" [overlay]="inner"></div>
+</div>
