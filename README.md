@@ -10,13 +10,47 @@ Spinner and text options should be added.
 
 ## Usage
 
+app.module.ts
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+app.component.html
+```html
+<div [overlay]="true"></div>
+```
+
 ## Api
+
+|Input       |  Description   |  Type  |  Default  |
+|------------|----------------|--------|-----------|
+|overlay    |  add the overlay-item | boolean | undefined |
+|overlayText    |  text to show when overlay is active | string | Loading |
+|overlaySpinner   |  show spinner | boolean | undefined |
 
 ## Test
 
 `npm test`
 
 ## Examples
+
+`cd example && npm i && npm start`
 
 ## MIT License
 
