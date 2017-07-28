@@ -9,10 +9,13 @@ class TestComponent1 { overlay: boolean; text: string; spinner: boolean; }
 @Component({ template: `<div [overlay]="overlay"></div>` }) // TODO create other parameters
 class TestComponent2 { overlay: boolean; text: string; spinner: boolean; }
 
+let identifier = 0;
+
 describe('OverlayDirective', () => {
   let fixture: ComponentFixture<TestComponent1 | TestComponent2>;
   let el: HTMLDivElement;
   let comp: TestComponent1 | TestComponent2;
+  let overlayItemSelector: string;
 
   function getHtml (selector: string = 'div'): string | undefined {
     const ret = el && el.querySelector && el.querySelector(selector);
@@ -58,6 +61,7 @@ describe('OverlayDirective', () => {
       fixture = TestBed.createComponent(TestComponent1);
       el = fixture.nativeElement;
       comp = fixture.componentInstance;
+      overlayItemSelector = `.overlay-item-${identifier++}`;
     });
 
     it('should be defined', () => {
@@ -66,35 +70,35 @@ describe('OverlayDirective', () => {
 
     it('should not show the overlay on init', () => {
       fixture.detectChanges();
-      expect(getStyle('.overlay-item')).toBe('');
+      expect(getStyle(overlayItemSelector)).toBe('');
     });
 
     it('should not show the overlay on false is passed', () => {
       fixture.detectChanges();
       comp.overlay = false;
       fixture.detectChanges();
-      expect(getStyle('.overlay-item')).toBe('');
+      expect(getStyle(overlayItemSelector)).toBe('');
     });
 
     it(`should not contain text on false`, () => {
       fixture.detectChanges();
       comp.overlay = false;
       fixture.detectChanges();
-      expect(getText('.overlay-item')).toBeUndefined();
+      expect(getText(overlayItemSelector)).toBeUndefined();
     });
 
     it('should show the overlay on true is passed', () => {
       fixture.detectChanges();
       comp.overlay = true;
       fixture.detectChanges();
-      expect(getStyle('.overlay-item').startsWith('position: absolute;')).toBe(true);
+      expect(getStyle(overlayItemSelector).startsWith('position: absolute;')).toBe(true);
     });
 
     it(`should contain 'Loading' as text`, () => {
       fixture.detectChanges();
       comp.overlay = true;
       fixture.detectChanges();
-      expect(getText('.overlay-item')).toBe('Loading');
+      expect(getText(overlayItemSelector)).toBe('Loading');
     });
   });
 

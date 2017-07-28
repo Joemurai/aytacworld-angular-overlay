@@ -1,27 +1,29 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit, Renderer } from '@angular/core';
 
+let identifier = 0;
+
 @Directive({ selector: '[overlay]' })
 export class OverlayDirective implements OnChanges, OnInit {
   @Input() overlay: boolean;
   private originStyle: string;
+  private id: string = `overlay-item-${identifier++}`;
 
   constructor (private el: ElementRef, private renderer: Renderer) { }
 
   ngOnInit (): void {
     const el: HTMLElement = this.el.nativeElement;
     const div: HTMLDivElement = this.renderer.createElement(el, 'div');
-    div.className = 'overlay-item';
+    div.className = this.id;
   }
 
   ngOnChanges (): void {
     const el: HTMLElement = this.el.nativeElement;
-    const div = el.querySelector('.overlay-item');
+    const div = el.querySelector('.' + this.id);
     if (div) {
       if (this.overlay) {
         // update root element
         this.originStyle = el.getAttribute('style') || '';
-        const minHeight = el.clientHeight < 300 ? 'height:300px;' : '';
-        el.setAttribute('style', `position: relative;${minHeight}${this.originStyle}`);
+        el.setAttribute('style', `position: relative;${this.originStyle}`);
         this.renderer.setElementClass(el, 'overlay', true);
 
         // update overlay-item
