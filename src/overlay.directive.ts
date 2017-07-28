@@ -5,6 +5,7 @@ let identifier = 0;
 @Directive({ selector: '[overlay]' })
 export class OverlayDirective implements OnChanges, OnInit {
   @Input() overlay: boolean;
+  @Input() overlayText: string = 'Loading';
   private originStyle: string;
   private id: string = `overlay-item-${identifier++}`;
 
@@ -36,7 +37,7 @@ export class OverlayDirective implements OnChanges, OnInit {
         opacity: 0.7;
         margin: 0;`;
         div.setAttribute('style', styles);
-        div.innerHTML = 'Loading';
+        div.innerHTML = this.overlayText;
       } else {
         el.setAttribute('style', this.originStyle);
         div.setAttribute('style', '');
