@@ -33,7 +33,8 @@ export class OverlayDirective implements OnChanges, OnInit {
         top: 0;
         left: 0;
         background: #ccc;
-        opacity: 0.7;`;
+        opacity: 0.7;
+        margin: 0;`;
         div.setAttribute('style', styles);
         div.innerHTML = 'Loading';
       } else {
