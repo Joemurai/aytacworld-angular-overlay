@@ -50,6 +50,8 @@ app.component.html
 
 ## Examples
 
+[Plunker](http://plnkr.co/edit/RlV3gpTzGYii8qhUV6qi)
+
 `cd example && npm i && npm start`
 
 ## MIT License
