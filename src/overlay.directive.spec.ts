@@ -6,7 +6,7 @@ import { OverlayDirective } from './overlay.directive';
 @Component({ template: `<div [overlay]="overlay"></div>` })
 class TestComponent1 { overlay: boolean; text: string; spinner: boolean; }
 
-@Component({ template: `<div [overlay]="overlay"></div>` }) // TODO create other parameters
+@Component({ template: `<div [overlay]="overlay" [overlayText]="text" [overlaySpinner]="spinner"></div>` }) // TODO create other parameters
 class TestComponent2 { overlay: boolean; text: string; spinner: boolean; }
 
 let identifier = 0;
@@ -36,7 +36,7 @@ describe('OverlayDirective', () => {
   function getText (selector: string = 'div'): string | undefined {
     const ret = el && el.querySelector && el.querySelector(selector);
     if (ret) {
-      return ret.textContent || undefined;
+      return ret.textContent || ret.textContent === '' ? ret.textContent : undefined;
     }
     return undefined;
   }
@@ -84,7 +84,7 @@ describe('OverlayDirective', () => {
       fixture.detectChanges();
       comp.overlay = false;
       fixture.detectChanges();
-      expect(getText(overlayItemSelector)).toBeUndefined();
+      expect(getText(overlayItemSelector)).toBe('');
     });
 
     it('should show the overlay on true is passed', () => {
@@ -103,29 +103,55 @@ describe('OverlayDirective', () => {
   });
 
   describe('all parameters are filled in', () => {
-    // beforeEach(() => {
-    //   TestBed.configureTestingModule({
-    //     declarations: [
-    //       OverlayDirective,
-    //       TestComponent2
-    //     ]
-    //   }).compileComponents();
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          OverlayDirective,
+          TestComponent2
+        ]
+      }).compileComponents();
 
-    //   fixture = TestBed.createComponent(TestComponent2);
-    //   el = fixture.nativeElement;
-    //   comp = fixture.componentInstance;
-    // });
+      fixture = TestBed.createComponent(TestComponent2);
+      el = fixture.nativeElement;
+      comp = fixture.componentInstance;
+      overlayItemSelector = `.overlay-item-${identifier++}`;
+    });
 
-    // it('should be defined', () => {
-    //   expect(comp).toBeDefined();
-    // });
+    it('should be defined', () => {
+      expect(comp).toBeDefined();
+    });
 
-    // it('should not show the overlay on init', () => {
-    //   expect(true).toBe(true);
-    // });
+    it('should not show the overlay on init', () => {
+      fixture.detectChanges();
+      expect(getStyle(overlayItemSelector)).toBe('');
+    });
 
-    // it('should show the overlay on true is passed', () => {
-    //   expect(true).toBe(true);
-    // });
+    it('should not show the overlay on false is passed', () => {
+      fixture.detectChanges();
+      comp.overlay = false;
+      fixture.detectChanges();
+      expect(getStyle(overlayItemSelector)).toBe('');
+    });
+
+    it(`should not contain text on false`, () => {
+      fixture.detectChanges();
+      comp.overlay = false;
+      fixture.detectChanges();
+      expect(getText(overlayItemSelector)).toBe('');
+    });
+
+    it('should show the overlay on true is passed', () => {
+      fixture.detectChanges();
+      comp.overlay = true;
+      fixture.detectChanges();
+      expect(getStyle(overlayItemSelector).startsWith('position: absolute;')).toBe(true);
+    });
+
+    it(`should not contain text`, () => {
+      fixture.detectChanges();
+      comp.overlay = true;
+      fixture.detectChanges();
+      expect(getText(overlayItemSelector)).toBe('');
+    });
   });
 });
