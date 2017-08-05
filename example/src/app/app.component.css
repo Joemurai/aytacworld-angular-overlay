@@ -12,3 +12,12 @@
   margin: 50px auto;
   background-color: blue;
 }
+
+.block {
+  border: 1px solid;
+  padding: 10px;
+}
+
+button.enabled {
+  color: blue;
+}

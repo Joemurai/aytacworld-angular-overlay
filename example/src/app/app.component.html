@@ -1,14 +1,16 @@
-<h1>
-  {{title}}
-</h1>
-
-<button (click)="outer = !outer">Outer</button>
-<button (click)="inner = !inner">Inner</button>
-
-<div class="outer" [overlay]="outer">
-  <div class="inner" [overlay]="inner" [overlayText]="'hello'"></div>
+<div class="block">
+  <button [class.enabled]="outer" (click)="outer = !outer">Outer</button>
+  <button [class.enabled]="inner" (click)="inner = !inner">Inner</button>
 </div>
-
-<div class="outer" [overlay]="outer" [overlaySpinner]="true">
-  <div class="inner" [overlay]="inner" [overlayText]="'hello'" [overlaySpinner]="true"></div>
+<div class="block">
+  <h1>Only Text</h1>
+  <div class="outer" [overlay]="outer">
+    <div class="inner" [overlay]="inner" [overlayText]="'hello'"></div>
+  </div>
+</div>
+<div class="block">
+  <h1>With Spinner</h1>
+  <div class="outer" [overlay]="outer" [overlaySpinner]="true">
+    <div class="inner" [overlay]="inner" [overlayText]="'hello'" [overlaySpinner]="true"></div>
+  </div>
 </div>

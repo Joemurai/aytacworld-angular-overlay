@@ -50,7 +50,7 @@ app.component.html
 
 ## Examples
 
-[Plunker](http://plnkr.co/edit/RlV3gpTzGYii8qhUV6qi)
+[Plunker](http://plnkr.co/edit/1HH7fh)
 
 `cd example && npm i && npm start`
 
