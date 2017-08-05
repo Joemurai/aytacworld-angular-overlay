@@ -9,4 +9,5 @@ export class AppComponent {
   title: string = 'app works!';
   outer: boolean;
   inner: boolean;
+  spinner: boolean;
 }
