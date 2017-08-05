@@ -153,5 +153,29 @@ describe('OverlayDirective', () => {
       fixture.detectChanges();
       expect(getText(overlayItemSelector)).toBe('');
     });
+
+    it(`should contain 'HelloWorld' as text`, () => {
+      comp.text = 'HelloWorld';
+      fixture.detectChanges();
+      comp.overlay = true;
+      fixture.detectChanges();
+      expect(getText(overlayItemSelector)).toBe('HelloWorld');
+    });
+
+    it('should show spinner', () => {
+      comp.spinner = true;
+      fixture.detectChanges();
+      comp.overlay = true;
+      fixture.detectChanges();
+      expect(getHtmlCount('svg')).toBe(1);
+    });
+
+    it(`should not contain text when spinner is shown`, () => {
+      comp.spinner = true;
+      fixture.detectChanges();
+      comp.overlay = true;
+      fixture.detectChanges();
+      expect((getText(overlayItemSelector) || '').trim()).toBe('');
+    });
   });
 });
