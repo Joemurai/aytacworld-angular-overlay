@@ -15,7 +15,7 @@ app.module.ts
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { OverlayModule } from 'aytacworld-angular-overlay';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -23,7 +23,8 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    OverlayModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -33,16 +34,18 @@ export class AppModule { }
 
 app.component.html
 ```html
-<div [overlay]="true"></div>
+<div [overlay]="true" [overlaySpinner]="true"></div>
 ```
 
 ## Api
 
 |Input       |  Description   |  Type  |  Default  |
 |------------|----------------|--------|-----------|
-|overlay    |  add the overlay-item | boolean | undefined |
-|overlayText    |  text to show when overlay is active | string | Loading |
+|overlay    |  show/hide overlay | boolean | undefined |
+|overlayText    |  text displayed in overlay | string | Loading |
 |overlaySpinner   |  show spinner | boolean | undefined |
+
+_if overlaySpinner is set to true, label will not be shown._
 
 ## Test
 
