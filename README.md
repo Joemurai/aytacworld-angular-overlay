@@ -53,7 +53,7 @@ _if overlaySpinner is set to true, label will not be shown._
 
 ## Examples
 
-[Plunker](http://plnkr.co/edit/1HH7fh)
+[Plunker](http://embed.plnkr.co/1HH7fh/)
 
 `cd example && npm i && npm start`
 
